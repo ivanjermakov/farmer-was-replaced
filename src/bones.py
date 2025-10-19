@@ -1,3 +1,5 @@
+threshold = 100
+
 def play():
     clear()
     change_hat(Hats.Brown_Hat)
@@ -15,31 +17,59 @@ def play():
             tx, ty = measure()
             apples += 1
 
-        if apples == 10:
+        if apples == threshold:
             for _ in range(10):
                 move(North)
                 move(West)
             apples += 1
-        elif apples < 10:
-            if x < tx and dir != West:
-                if not move(East):
+        elif apples < threshold:
+            if x < tx:
+                if move(East):
+                    dir = East
+                elif move(North):
+                    dir = North
+                elif move(South):
+                    dir = South
+                elif move(West):
+                    dir = West
+                else:
                     break
-                dir = East
                 continue
-            if x > tx and dir != East:
-                if not move(West):
+            if x > tx:
+                if move(West):
+                    dir = West
+                elif move(North):
+                    dir = North
+                elif move(South):
+                    dir = South
+                elif move(East):
+                    dir = East
+                else:
                     break
-                dir = West
                 continue
-            if y < ty and dir != South:
-                if not move(North):
+            if y < ty:
+                if move(North):
+                    dir = North
+                elif move(East):
+                    dir = East
+                elif move(West):
+                    dir = West
+                elif move(South):
+                    dir = South
+                else:
                     break
-                dir = North
                 continue
-            if y > ty and dir != North:
-                if not move(South):
+            if y > ty:
+                if move(South):
+                    dir = South
+                elif move(East):
+                    dir = East
+                elif move(West):
+                    dir = West
+                elif move(North):
+                    dir = North
+                else:
                     break
-                dir = South
                 continue
         else:
             if x == 0 and y == 0:
@@ -73,3 +103,4 @@ def play():
 
 while True:
     play()
+
